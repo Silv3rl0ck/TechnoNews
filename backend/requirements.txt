@@ -1,0 +1,6 @@
+django==2.2.24
+djangorestframework
+djongo
+pytz               # required by djongo
+django-cors-headers
+gunicorn
