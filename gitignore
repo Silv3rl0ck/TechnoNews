@@ -1,6 +1,0 @@
-__pycache__/
-*.pyc
-.env
-dist/
-node_modules/
-.next/
