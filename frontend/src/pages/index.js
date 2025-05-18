@@ -58,9 +58,7 @@ export default function Home({ articles }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/articles/');
+  const res = await fetch(`${API}/articles/`);
   const data = await res.json();
-  return {
-    props: { articles: data.results },
-  };
+  return { props: { articles: data.results } };
 }
