@@ -1,6 +1,7 @@
 // frontend/src/pages/article/[slug].js
 import { useRouter } from 'next/router';
 import axios from 'axios';
+const API = https://technonews.onrender.com/api
 
 export default function ArticleDetail({ article }) {
     const router = useRouter();
