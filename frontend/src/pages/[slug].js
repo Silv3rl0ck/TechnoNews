@@ -47,7 +47,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/${params.slug}/`);
+  const res = await fetch(`${API}/articles/${params.slug}/`);
   const article = await res.json();
-  return { props: { article }, revalidate: 60 };
+  return { props: { article } };
 }
