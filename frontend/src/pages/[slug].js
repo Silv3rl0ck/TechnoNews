@@ -40,25 +40,14 @@ export default function ArticleDetail({ article }) {
 }
 
 export async function getStaticPaths() {
-    const res = await axios.get('http://localhost:8000/api/articles/');
-    // Fix: handle DRF pagination and get slugs from .results
-    const articles = res.data.results || [];
-    const paths = articles.map(article => ({
-        params: { slug: article.slug },
-    }));
-    return { paths, fallback: true };
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/`);
+  const data = await res.json();
+  const paths = data.results.map(a => ({ params: { slug: a.slug } }));
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-    try {
-        // If your API supports /api/articles/<slug>/:
-        const res = await axios.get(`http://localhost:8000/api/articles/${params.slug}/`);
-        return {
-            props: { article: res.data },
-            revalidate: 60
-        };
-    } catch (err) {
-        // If not found, return null
-        return { props: { article: null } };
-    }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/articles/${params.slug}/`);
+  const article = await res.json();
+  return { props: { article }, revalidate: 60 };
 }
