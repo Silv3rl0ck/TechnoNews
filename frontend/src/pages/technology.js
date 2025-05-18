@@ -57,7 +57,18 @@ export default function Technology({ articles }) {
 }
 
 export async function getStaticProps() {
+  // use your Render env var, or fallback to localhost for local dev:
+  const API = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api';
   const res = await fetch(`${API}/articles/`);
   const data = await res.json();
-  return { props: { articles: data.results } };
+
+  // filter for technology
+  const filtered = (data.results || []).filter(
+    (a) => typeof a.category === 'string' && a.category.toLowerCase() === 'technology'
+  );
+
+  return {
+    props: { articles: filtered },
+    revalidate: 60,
+  };
 }
