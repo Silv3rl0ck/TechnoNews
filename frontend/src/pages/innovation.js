@@ -1,5 +1,6 @@
 import React from 'react';
 import ArticleCard from '../components/ArticleCard';
+const API = https://technonews.onrender.com/api
 
 export default function Innovation({ articles }) {
   return (
