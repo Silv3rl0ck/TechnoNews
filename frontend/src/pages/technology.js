@@ -57,12 +57,7 @@ export default function Technology({ articles }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/articles/');
+  const res = await fetch(`${API}/articles/`);
   const data = await res.json();
-  const filtered = data.results.filter(
-    a => typeof a.category === 'string' && a.category.toLowerCase() === 'technology'
-  );
-  return {
-    props: { articles: filtered },
-  };
+  return { props: { articles: data.results } };
 }
